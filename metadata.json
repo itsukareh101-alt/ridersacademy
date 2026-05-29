@@ -1,0 +1,6 @@
+{
+  "name": "RiderAcademy",
+  "description": "A highly realistic permit test simulator based on the official Minnesota Motorcycle Manual, featuring a 40-question exam mode, topic drills, and an interactive lane position simulator.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
