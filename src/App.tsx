@@ -93,6 +93,34 @@ export default function App() {
     }
   }, []);
 
+  // Attempt to render live PayPal Hosted Button components when the SDK finishes loading
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const interval = setInterval(() => {
+      const paypal = (window as any).paypal;
+      if (paypal && paypal.HostedButtons) {
+        clearInterval(interval);
+        try {
+          const container = document.getElementById('paypal-container-MN_STUDY_DONATE');
+          if (container) {
+            // Render the hosted button if SDK is fully initialized
+            paypal.HostedButtons({
+              hostedButtonId: "MN_DONATION_BTN", // Custom/configurable identifier
+            }).render("#paypal-container-MN_STUDY_DONATE")
+              .catch((err: any) => {
+                console.log("PayPal Hosted Button loaded, waiting for active configuration:", err);
+              });
+          }
+        } catch (e) {
+          console.warn("PayPal initialization fallback helper:", e);
+        }
+      }
+    }, 1500);
+
+    return () => clearInterval(interval);
+  }, []);
+
   // Cancel speech on question change, view change, or quiz end
   useEffect(() => {
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
@@ -502,12 +530,30 @@ export default function App() {
 
       {/* Footer bar */}
       <footer id="footer" className="mt-12 bg-white border-t border-slate-200 p-6 text-xs text-slate-500 leading-relaxed text-center sm:text-left shadow-inner transition-colors">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="space-y-1">
-            <p className="font-bold text-slate-800">RiderAcademy — Minnesota Permit Practice Companion © 2026</p>
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-3">
+            <p className="font-bold text-slate-800">MN-StudyBook — Minnesota Permit Practice Companion © 2026</p>
             <p className="max-w-2xl text-slate-400">
               Constructed strictly as a realistic studying helper based on safety guidelines cited from state public operator instruction manuals. This site is completely independent of the state driver licensing services division. Always practice safe driving techniques, pay full attention, and wear safety gear.
             </p>
+
+            {/* PayPal & Venmo Support Area */}
+            <div className="flex flex-col sm:flex-row items-center gap-3 bg-slate-50 p-3.5 rounded-2xl border border-slate-100 max-w-md inline-flex">
+              <div className="text-center sm:text-left">
+                <p className="text-[11px] font-bold text-slate-700">Support MN-StudyBook development</p>
+                <p className="text-[10px] text-slate-400 leading-tight">Keep study guides ad-free and updated for prospective drivers.</p>
+              </div>
+              <div id="paypal-container-MN_STUDY_DONATE" className="shrink-0 min-w-[130px] flex justify-center items-center">
+                <a 
+                  href="https://www.paypal.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-3.5 py-2 bg-[#FFC439] hover:bg-[#F2B930] text-blue-900 font-bold font-sans rounded-xl text-[11px] shadow-xs hover:shadow-sm transition-all inline-flex items-center gap-1.5 cursor-pointer active:scale-95 text-center justify-center w-full"
+                >
+                  <span>PayPal / Venmo</span>
+                </a>
+              </div>
+            </div>
           </div>
           <div className="flex gap-4 shrink-0 font-mono text-[10px] font-semibold text-slate-500">
              <button onClick={() => setView('disclaimer')} className="text-blue-600 hover:text-blue-800 hover:underline cursor-pointer">

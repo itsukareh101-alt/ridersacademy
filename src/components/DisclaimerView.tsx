@@ -26,7 +26,7 @@ export default function DisclaimerView({ onAccept }: DisclaimerViewProps) {
               Legal Disclaimer & Rules
             </h2>
             <p className="text-[10px] text-slate-500 font-mono">
-              RiderAcademy Independent Practice Tool
+              MN-StudyBook Independent Practice Tool
             </p>
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function DisclaimerView({ onAccept }: DisclaimerViewProps) {
             <span>⚠️ Non-Affiliation Declaration</span>
           </h3>
           <p className="text-[11px] leading-relaxed text-amber-900">
-            <strong>RiderAcademy</strong> is an independent practice application. This helper tool is <strong>not</strong> operated, endorsed, or sponsored by, or affiliated with, the State of Minnesota, the Minnesota DVS, or any other government licensing agency.
+            <strong>MN-StudyBook</strong> is an independent practice application. This helper tool is <strong>not</strong> operated, endorsed, or sponsored by, or affiliated with, the State of Minnesota, the Minnesota DVS, or any other government licensing agency.
           </p>
         </div>
 

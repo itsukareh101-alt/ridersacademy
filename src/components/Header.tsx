@@ -23,7 +23,7 @@ export default function Header({ view, setView, permitType }: HeaderProps) {
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-sm md:text-md font-display font-medium uppercase tracking-wider text-white font-bold">
-                RiderAcademy
+                MN-StudyBook
               </h1>
               <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border uppercase transition-colors ${
                 isMoto
